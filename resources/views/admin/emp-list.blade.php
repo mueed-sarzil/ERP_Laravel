@@ -14,6 +14,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
 body {
   margin: 0;
@@ -131,6 +136,29 @@ color: white;
 .btn1:hover {
   background-color: lightblue;
 }
+.btn2 {
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 2px 2px;
+  cursor: pointer;
+  border-radius: 10px
+}
+
+/* Darker background on mouse-over */
+.btn2:hover {
+  background-color: green;
+}
+.input {
+width: 80%;
+padding: 10px;
+background: white;
+border: 10px;
+outline: fixed;
+}
 </style>
 </head>
 <body> 
@@ -154,23 +182,27 @@ color: white;
 </div><hr>
 <h1 align="center">Employee-List</h1>
     <div class="container">
+      <input  id="myInput" class="input" type="text" placeholder="Search..">
+  <br><br>
   <table id="customers" width="100%">
     <thead>
       <tr>
-        <th>Action</th>
+        <th>View</th>
+        <th>Delete</th>
         <th>Name</th>
         <th>Phone</th>
         <th>Job-Title</th>
         <th>Picture</th>
       </tr>
     </thead>
-    <tbody> 
+    <tbody id="myTable"> 
         @foreach($admins as $acc)  
         <tr class="success">
-        <td width="10%">
+        <td width="5%">
           <a class="button1" href="{{route('admin.view', $acc['id'])}}" class="btn1"><i class="fa fa-folder"></i></a>
-          <a class="button2" href="{{route('admin.delete', $acc['id'])}}" class="btn"><i class="fa fa-trash"></i></a>
+          
         </td>
+        <td width="5%"><a class="button2" href="{{route('admin.delete', $acc['id'])}}" class="btn"><i class="fa fa-trash"></i></a></td>
         <td width="10%">{{$acc['name']}}</td>
         <td width="15%">{{$acc['phone']}}</td>
         <td width="15%">{{$acc['title']}}</td>
@@ -180,8 +212,26 @@ color: white;
       @endforeach
     </tbody>
   </table>
-</div>
 
+</div>
+<div>
+  <br/>
+  <span data-href="/emp_csv" id="export" class="btn2" onclick="exportTasks(event.target);"><i class="fa fa-download"></i>Download</span>
+</div>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+ function exportTasks(_this) {
+      let _url = $(_this).data('href');
+      window.location.href = _url;
+   }
+</script>
 </div>
 </form>
 </body>

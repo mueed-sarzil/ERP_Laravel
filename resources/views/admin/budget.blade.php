@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Budget|Dhaka Tribune</title>
+  <title>Budget|EMS</title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body {
   margin: 0;
@@ -30,7 +33,7 @@ li a {
 }
 
 li a.active {
-  background-color: red;
+  background-color: DodgerBlue;
   color: white;
 }
 
@@ -118,17 +121,32 @@ background: #8BC34A;
 color: #ffffff;
 }
 
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 2px 2px;
+  cursor: pointer;
+  border-radius: 10px
+}
 
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
 </style>
 </head>
 <body>  
 <ul>
-  <img src="/images/Logo.JPG" width="100%">
-  <li><a class="active" href="{{route('admin.index')}}">My Profile</a></li>
+  <img src="/images/Logo.JPG" width="100%" height="20%">
+  <li><a class="active" href="{{route('admin.index')}}">Profile</a></li>
   <li><a href="{{route('admin.create_emp')}}">Create-Employee</a></li>
   <li><a href="{{route('admin.emp-list')}}">Employee-List</a></li>
-  <li><a href="{{route('admin.complain')}}">Complain</a></li>
-  <li><a href="{{route('admin.complain-list')}}">Complain-List</a></li>
+  <li><a href="{{route('admin.complain')}}">Leave</a></li>
+  <li><a href="{{route('admin.complain-list')}}">Leave-List</a></li>
   <li><a href="{{route('admin.budget')}}">Budget-Form</a></li>
   <li><a href="{{route('admin.budget_show')}}">Budget-List</a></li>
   <li><a href="{{route('logout.index')}}">Logout</a></li>
@@ -136,8 +154,8 @@ color: #ffffff;
 
      
 <div style="margin-left:25%;padding:1px 16px;height:100px;">
-    <div><h1 style="color: blue;" align="center">Dhaka Tribune IT</h1>
-    <h3 style="color: blue;">Welcome To <a href="{{route('admin.index')}}">{{ Session::get('uname')}}</a></h3>
+    <div> <h1 align="center" style="color: blue;"><b><i>Employee Management System</i></b></h1>
+       <h3 style="color: blue;">Welcome To <a href="{{route('admin.index')}}">{{ Session::get('uname')}}</a></h3>
 </div><hr>
 <h1 align="center">Budget-Form <?php echo date("Y"); ?></h1>
     <form method="post">
@@ -234,7 +252,7 @@ color: #ffffff;
       <div class="line"></div>
     </div>
   </label>
-  <button type="submit">submit</button><br/>
+  <button type="submit" class="btn"><i class="fa fa-save"></i>Save</button><br/>
 </form>
      
 

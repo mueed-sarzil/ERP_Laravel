@@ -33,6 +33,7 @@ Route::post('/admin/{id}/delete', 'AdminController@destroy');
 Route::get('/admin/{id}/view', 'AdminController@view')->name('admin.view');
 
 Route::get('/admin/emp-list', 'AdminController@emp_list')->name('admin.emp-list');
+Route::get('/emp_csv', 'AdminController@emp_exportCsv');
 Route::get('/admin/complain', 'AdminController@complain')->name('admin.complain');
 Route::post('/admin/complain', 'AdminController@complainstore');
 Route::get('/admin/complain-list', 'AdminController@complain_list')->name('admin.complain-list');
@@ -40,7 +41,7 @@ Route::get('/admin/complain-list', 'AdminController@complain_list')->name('admin
 Route::get('/admin/budget', 'AdminController@budget')->name('admin.budget');
 Route::post('/admin/budget', 'AdminController@budgetstore');
 Route::get('/admin/budget_show', 'AdminController@budgetshow')->name('admin.budget_show');
-
+Route::get('/budget_csv', 'LoginController@exportCsv');
 Route::get('/admin/{id}/bdelete', 'AdminController@bdelete')->name('admin.bdelete');
 Route::post('/admin/{id}/bdelete', 'AdminController@bdestroy');
 

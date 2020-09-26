@@ -2,6 +2,10 @@
 <html>
 <head>
 	<title>Employee-Details|Employee Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<style> 
 		body {
   margin: 0;
@@ -85,6 +89,18 @@ color: white
   background-color: #4CAF50;
   color: white;
 }
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: black;
+  font-size: 18px;
+}
 </style>
 </head>
 <body>
@@ -104,32 +120,18 @@ color: white
      
 <div style="margin-left:25%;padding:1px 10px;height:100px;">
     <div> <h1 align="center" style="color: blue;"><b><i>Employee Management System</i></b></h1>
-    <h1 style="color: blue;">Welcome To {{ Session::get('uname')}}</h1>
+    <h3 style="color: blue;">Welcome To <a href="{{route('admin.index')}}">{{ Session::get('uname')}}</a>
 </div><hr>
 		<h1 align="center">Employee Details</h1>
    <!--  <div align="center"><img src="{{asset($acc->img)}}" alt="Picture"  class="w3-round-xlarge" style="width:50%" ></div> -->
-	<table align="center" id="customers">
-		<tr>
-			<td>Employee Name:{{$acc['name']}}</td>
-			
-		</tr>
-		<tr>
-			<td>Email:{{$acc['email']}}</td>
-			
-		</tr>
-		<tr>
-			<td>Phone:{{$acc['phone']}}</td>
-			
-		</tr>
-		<tr>
-			<td>Job-Title:{{$acc['title']}}</td>
-			
-		</tr>
-		<tr>
-			<td>User-Name:{{$acc['uname']}}</td>
-			
-		</tr>
-		
-	</table>
+  <div class="card" align="center">
+  <img src="{{asset($acc->img)}}" alt="Picture" style="width:60%">
+  <h3><b>{{$acc['name']}}</b></h3>
+  <p class="title"><i>{{$acc['title']}}</i></p>
+  <p><i class="glyphicon glyphicon-envelope"></i>{{$acc['email']}}</p>
+  <p><i class="fa fa-phone"></i>{{$acc['phone']}}</p>
+  <p><i class="glyphicon glyphicon-user">{{$acc['uname']}}</i></p>
+</div>
+	
 </body>
 </html>

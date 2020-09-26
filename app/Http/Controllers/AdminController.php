@@ -12,13 +12,9 @@ class AdminController extends Controller
     //
     public function index(){
         $accId=session()->get('uname');
-        //return view('user.userprofile');
-
         $acc = Admin::where('uname',$accId)
         ->get();
         return view('admin.index')->with('profiles', $acc);
-
-    	//return view('admin.index');
     }
 
     public function create(){
@@ -27,8 +23,8 @@ class AdminController extends Controller
     }
     public function emp_list(){
 
-    	$acc =Admin::all();
-        return view('admin.emp-list')->with('admins', $acc);
+    	$admins =Admin::all();
+        return view('admin.emp-list',compact('admins'));
     	//return view('admin.emp-list');
     }
     public function complain(){
@@ -37,8 +33,8 @@ class AdminController extends Controller
     }
     public function complain_list(){
 
-        $acc =Complain::all();
-        return view('admin.complain-list')->with('admins', $acc);
+        $leaves =Complain::all();
+        return view('admin.complain-list',compact('leaves'));
     	//return view('admin.complain-list');
     }
    public function empstore(Request $req){
@@ -61,6 +57,39 @@ class AdminController extends Controller
         $account->save();
 
         return view('admin.create_emp');
+    }
+    public function emp_exportCsv(Request $req)
+{
+   $fileName = 'Employee_List.csv';
+   $tasks = Admin::all();
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = array('Name', 'Designation', 'Email', 'Phone', 'User-Name');
+
+        $callback = function() use($tasks, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($tasks as $task) {
+                $row['Name']  = $task->name;
+                $row['Designation']    = $task->title;
+                $row['Email']    = $task->email;
+                $row['Phone']  = $task->phone;
+                $row['User-Name']  = $task->uname;
+                fputcsv($file, array($row['Name'], $row['Designation'],  $row['Email'], $row['Phone'], $row['User-Name']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
     public function complainstore(Request $req){
@@ -173,8 +202,9 @@ class AdminController extends Controller
         $account->decem = $req->dec;
         $account->save();
 
-        return view('admin.budget_show');
+        return view('admin.budget');
 
     }
+   
 
 }

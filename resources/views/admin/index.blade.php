@@ -148,7 +148,7 @@ a {
 
      
 <div style="margin-left:25%;padding:1px 16px;height:100px;">
-      <h1 align="center" style="color: blue;"><b><i>Employee Management System</i></b></h1>
+     <div> <h1 align="center" style="color: blue;"><b><i>Employee Management System</i></b></h1>
        <h3 style="color: blue;">Welcome To <a href="{{route('admin.index')}}">{{ Session::get('uname')}}</a></h3>
      
 </div><hr>
@@ -156,7 +156,7 @@ a {
  <div class="card" align="center">
    @foreach($profiles as $acc)
   <img src="{{asset($acc->img)}}" alt="Picture" style="width:60%">
-  <h1>{{$acc['name']}}</h1>
+  <h3>{{$acc['name']}}</h3>
   <p class="title"><i>{{$acc['title']}}</i></p>
   <p><i class="fa fa-send"></i>{{$acc['email']}}</p>
   <p><i class="fa fa-phone"></i>{{$acc['phone']}}</p>
